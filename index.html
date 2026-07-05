@@ -1,0 +1,1057 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Portal Inteligente Semillas Financieras - Programa Piloto de Educación Financiera para hijos de socios." />
+  <title>Semillas Financieras | Portal Corporativo</title>
+  <style>
+    /* ============================================================
+       PORTAL INTELIGENTE SEMILLAS FINANCIERAS
+       Tecnologías: HTML + CSS + JavaScript puro
+       Listo para GitHub Pages / hosting estático
+       ============================================================ */
+
+    :root{
+      --verde-oscuro:#00611B;
+      --verde-medio:#1F7A2D;
+      --verde-claro:#4BA94E;
+      --dorado:#F0BC03;
+      --naranja:#F38B00;
+      --naranja-claro:#F6A623;
+      --blanco:#FFFFFF;
+      --gris-fondo:#F2F2F2;
+      --negro:#000000;
+      --gris-100:#FFFFFF;
+      --gris-200:#F2F2F2;
+      --gris-300:#DCDCDC;
+      --gris-400:#B8B8B8;
+      --gris-700:#3A3A3A;
+      --sombra:0 18px 45px rgba(0,97,27,.16);
+      --sombra-hover:0 26px 68px rgba(31,122,45,.26);
+      --radio-xl:28px;
+      --radio-lg:20px;
+      --radio-md:14px;
+      --nav-height:82px;
+      --whatsapp:#25D366;
+    }
+
+    *{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{
+      min-height:100vh;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(240,188,3,.18), transparent 34%),
+        radial-gradient(circle at top right, rgba(75,169,78,.15), transparent 36%),
+        var(--gris-fondo);
+      color:var(--negro);
+      overflow-x:hidden;
+    }
+
+    a{text-decoration:none;color:inherit}
+    button,input,select,textarea{font:inherit}
+    img{max-width:100%;display:block}
+
+    .sr-only{
+      position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);border:0;
+    }
+
+    /* ===================== NAV ===================== */
+    .topbar{
+      position:fixed;
+      inset:0 0 auto 0;
+      height:var(--nav-height);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:0 24px;
+      z-index:1000;
+      background:rgba(255,255,255,.92);
+      backdrop-filter: blur(18px);
+      border-bottom:1px solid rgba(0,97,27,.12);
+      box-shadow:0 14px 35px rgba(0,0,0,.08);
+    }
+    .nav-shell{
+      width:min(1240px,100%);
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:18px;
+    }
+    .brand{
+      display:flex;align-items:center;gap:12px;min-width:max-content;
+    }
+    .brand-logo{
+      width:52px;height:52px;border-radius:50%;object-fit:cover;
+      border:3px solid var(--dorado);
+      box-shadow:0 10px 24px rgba(240,188,3,.22);
+      background:var(--blanco);
+    }
+    .brand-title{line-height:1.05}
+    .brand-title strong{display:block;color:var(--verde-oscuro);font-size:1.02rem;letter-spacing:.2px}
+    .brand-title span{display:block;color:var(--gris-700);font-size:.78rem;font-weight:700}
+
+    .nav-toggle{
+      display:none;border:0;background:var(--verde-oscuro);color:var(--blanco);
+      width:46px;height:46px;border-radius:16px;cursor:pointer;
+      box-shadow:0 14px 28px rgba(0,97,27,.22);
+    }
+    .nav-toggle svg{width:23px;height:23px;fill:currentColor}
+
+    .nav-menu{
+      display:flex;align-items:center;justify-content:flex-end;gap:4px;list-style:none;flex-wrap:wrap;
+    }
+    .nav-link{
+      position:relative;border:0;background:transparent;color:var(--gris-700);
+      padding:10px 12px;border-radius:999px;cursor:pointer;font-weight:800;font-size:.86rem;
+      transition:all .24s ease;
+    }
+    .nav-link:hover,.nav-link.active{
+      color:var(--blanco);
+      background:linear-gradient(135deg,var(--verde-oscuro),var(--verde-medio));
+      transform:translateY(-1px);
+      box-shadow:0 12px 24px rgba(0,97,27,.2);
+    }
+
+    /* ===================== LAYOUT ===================== */
+    main{padding-top:var(--nav-height);min-height:100vh}
+    .view{
+      display:none;
+      min-height:calc(100vh - var(--nav-height));
+      padding:42px 24px;
+      animation:fadeSlide .42s ease both;
+    }
+    .view.active{display:block}
+    @keyframes fadeSlide{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+    .container{width:min(1180px,100%);margin:0 auto}
+    .section-head{display:flex;align-items:flex-end;justify-content:space-between;gap:22px;margin-bottom:28px}
+    .eyebrow{
+      display:inline-flex;align-items:center;gap:9px;color:var(--naranja);font-weight:900;text-transform:uppercase;
+      letter-spacing:.12em;font-size:.78rem;margin-bottom:12px;
+    }
+    .eyebrow::before{content:"";width:34px;height:4px;border-radius:99px;background:var(--naranja-claro)}
+    h1,h2,h3{color:var(--verde-oscuro);letter-spacing:-.04em}
+    h1{font-size:clamp(2.4rem,5vw,5.4rem);line-height:.92}
+    h2{font-size:clamp(2rem,3.5vw,3.6rem);line-height:1}
+    h3{font-size:1.35rem}
+    .lead{color:var(--gris-700);font-size:1.05rem;line-height:1.75;max-width:820px}
+    .muted{color:var(--gris-700);line-height:1.65}
+
+    .btn-row{display:flex;flex-wrap:wrap;gap:14px;margin-top:26px}
+    .btn{
+      border:0;cursor:pointer;border-radius:999px;padding:14px 22px;font-weight:900;
+      display:inline-flex;align-items:center;justify-content:center;gap:10px;
+      min-height:50px;transition:all .25s ease;
+    }
+    .btn svg{width:20px;height:20px;fill:currentColor}
+    .btn-primary{background:linear-gradient(135deg,var(--verde-oscuro),var(--verde-medio));color:var(--blanco);box-shadow:0 15px 30px rgba(0,97,27,.28)}
+    .btn-primary:hover{transform:translateY(-3px);box-shadow:var(--sombra-hover)}
+    .btn-secondary{background:var(--blanco);color:var(--verde-oscuro);border:1px solid rgba(0,97,27,.18);box-shadow:0 12px 25px rgba(0,0,0,.07)}
+    .btn-secondary:hover{transform:translateY(-3px);border-color:var(--dorado);box-shadow:0 18px 38px rgba(240,188,3,.18)}
+    .btn:disabled{opacity:.55;cursor:not-allowed;transform:none;box-shadow:none}
+
+    /* ===================== HERO ===================== */
+    .hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:32px;align-items:center}
+    .hero-card{
+      background:linear-gradient(135deg,rgba(255,255,255,.96),rgba(255,255,255,.86));
+      border:1px solid rgba(0,97,27,.14);border-radius:var(--radio-xl);padding:38px;
+      box-shadow:var(--sombra);position:relative;overflow:hidden;
+    }
+    .hero-card::after{
+      content:"";position:absolute;right:-95px;bottom:-95px;width:260px;height:260px;border-radius:50%;
+      background:radial-gradient(circle,rgba(240,188,3,.55),rgba(246,166,35,.18),transparent 70%);
+      pointer-events:none;
+    }
+    .title-accent{color:var(--naranja);display:inline-block}
+    .event-meta{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:30px;position:relative;z-index:1}
+    .meta-tile{
+      background:var(--blanco);border:1px solid rgba(0,97,27,.12);border-radius:18px;padding:16px;
+      box-shadow:0 10px 24px rgba(0,0,0,.06);
+    }
+    .meta-tile span{display:block;font-size:.75rem;color:var(--gris-700);font-weight:800;text-transform:uppercase;letter-spacing:.08em;margin-bottom:6px}
+    .meta-tile strong{color:var(--verde-oscuro);font-size:.98rem;line-height:1.25}
+    .hero-media{
+      border-radius:var(--radio-xl);overflow:hidden;min-height:560px;position:relative;box-shadow:var(--sombra);
+      border:1px solid rgba(0,97,27,.12);background:var(--verde-oscuro);
+    }
+    .hero-media>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:saturate(1.05)}
+    .hero-media::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,97,27,.04),rgba(0,97,27,.66))}
+    .hero-badge{
+      position:absolute;left:22px;right:22px;bottom:22px;z-index:2;border-radius:24px;padding:18px;
+      display:flex;align-items:center;gap:16px;background:rgba(255,255,255,.92);backdrop-filter:blur(14px);
+      box-shadow:0 20px 44px rgba(0,0,0,.18);
+    }
+    .hero-badge img{width:70px;height:70px;border-radius:50%;object-fit:cover;border:3px solid var(--dorado);background:var(--blanco)}
+    .hero-badge strong{color:var(--verde-oscuro);display:block;font-size:1rem}
+    .hero-badge span{display:block;color:var(--gris-700);font-weight:700;font-size:.86rem;margin-top:3px}
+
+    /* ===================== CARDS ===================== */
+    .card{
+      background:rgba(255,255,255,.94);border:1px solid rgba(0,97,27,.12);border-radius:var(--radio-xl);
+      padding:26px;box-shadow:var(--sombra);transition:all .25s ease;position:relative;overflow:hidden;
+    }
+    .card:hover{transform:translateY(-5px);box-shadow:var(--sombra-hover)}
+    .card::before{content:"";position:absolute;left:0;top:0;width:7px;height:100%;background:linear-gradient(var(--naranja),var(--dorado),var(--verde-claro))}
+    .grid-2{display:grid;grid-template-columns:repeat(2,1fr);gap:24px}
+    .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+    .grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+
+    .programs{margin-top:20px}
+    .program-card{min-height:290px}
+    .program-card.orange{background:linear-gradient(135deg,rgba(246,166,35,.14),rgba(255,255,255,.95))}
+    .program-card.green{background:linear-gradient(135deg,rgba(75,169,78,.13),rgba(255,255,255,.96))}
+    .program-label{display:inline-flex;padding:9px 18px;border-radius:8px;color:var(--blanco);font-weight:950;font-size:1.1rem;margin-bottom:18px}
+    .program-card.orange .program-label{background:var(--naranja)}
+    .program-card.green .program-label{background:var(--verde-oscuro)}
+    .program-title{color:var(--verde-oscuro);font-size:1.55rem;margin-bottom:15px}
+    .program-card.orange .program-title{color:var(--naranja)}
+    .program-list{list-style:none;display:grid;gap:14px;margin-top:22px}
+    .program-list li{display:flex;gap:12px;align-items:center;font-weight:900;color:var(--gris-700)}
+    .program-list svg{width:22px;height:22px;fill:var(--verde-medio);flex:0 0 auto}
+    .program-card.orange svg{fill:var(--naranja)}
+    .quote-ribbon{margin:26px auto 0;width:min(900px,100%);background:var(--verde-oscuro);color:var(--blanco);border-radius:18px;padding:22px 28px;text-align:center;font-weight:950;font-size:1.2rem;box-shadow:var(--sombra)}
+    .quote-ribbon em{display:block;margin-top:8px;font-size:1.18rem;color:var(--blanco)}
+
+    /* ===================== AGENDA ===================== */
+    .timeline{display:grid;gap:16px;position:relative}
+    .timeline-item{
+      display:grid;grid-template-columns:90px 1fr;gap:18px;align-items:stretch;
+      background:var(--blanco);border-radius:22px;border:1px solid rgba(0,97,27,.11);box-shadow:0 12px 28px rgba(0,0,0,.06);overflow:hidden;transition:all .24s ease;
+    }
+    .timeline-item:hover{transform:translateX(4px);box-shadow:var(--sombra)}
+
+.time-box{
+    background:linear-gradient(135deg,var(--verde-oscuro),var(--verde-medio));
+    color:var(--dorado);
+    display:grid;
+    place-items:center;
+    font-weight:950;
+
+    font: size 1.5rem;      /* antes 1.1rem */
+    padding:16px;           /* antes 20px */
+}
+
+.timeline-detail{
+    padding:16px 18px;      /* antes 20px 22px */
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:13px;               /* antes 16px */
+}
+
+.timeline-detail strong{
+    font-size:1.02rem;      /* antes 1.08rem */
+    color:var(--verde-oscuro);
+}
+
+.timeline-detail svg{
+    width:22px;             /* antes 28px */
+    height:22px;            /* antes 28px */
+    fill:var(--naranja);
+    flex:0 0 auto;
+}
+/*AQUI AGREGUE PARA ALINEAR EL TEXTO HORARIO EN AGENDA*/
+.agenda-horario{
+    text-align:right;
+    margin-top:20px;
+}
+
+/*.agenda-horario strong{
+    font-weight:900;
+    color:var(--verde-oscuro);
+}*/
+
+
+
+
+
+    /* ===================== SPEAKERS ===================== */
+    .speaker-card{padding:0;overflow:hidden}
+    .speaker-img{height:330px;width:100%;object-fit:cover;background:var(--gris-200)}
+    .speaker-body{padding:24px}
+    .speaker-pill{display:inline-flex;padding:8px 12px;border-radius:999px;background:rgba(240,188,3,.18);color:var(--verde-oscuro);font-weight:900;font-size:.8rem;margin-bottom:12px}
+
+    .modal-backdrop{position:fixed;inset:0;background:rgba(0,0,0,.62);display:none;align-items:center;justify-content:center;z-index:1400;padding:20px;animation:fadeSlide .25s ease both}
+    .modal-backdrop.open{display:flex}
+    .modal{width:min(820px,100%);background:var(--blanco);border-radius:32px;box-shadow:0 30px 90px rgba(0,0,0,.35);overflow:hidden;border:1px solid rgba(255,255,255,.4)}
+    .modal-grid{display:grid;grid-template-columns:.85fr 1.15fr}
+    .modal img{height:100%;min-height:420px;width:100%;object-fit:cover;background:var(--gris-200)}
+    .modal-content{padding:32px;display:flex;flex-direction:column;justify-content:center;gap:16px}
+    .modal-content p{line-height:1.75;color:var(--gris-700)}
+
+    /* ===================== BENEFITS ===================== */
+    .benefit-card{text-align:center;min-height:210px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px}
+    .icon-round{width:66px;height:66px;border-radius:22px;background:linear-gradient(135deg,var(--verde-oscuro),var(--verde-medio));display:grid;place-items:center;box-shadow:0 15px 28px rgba(0,97,27,.22)}
+    .icon-round svg{width:32px;height:32px;fill:var(--dorado)}
+
+
+    /*.benefit-card{
+        text-align:center;
+        min-height:260px;
+        display:flex;
+        flex-direction:column;
+        align-items:center;
+        justify-content:center;
+        padding:25px;
+        transition:all .3s ease;
+    }
+
+    .benefit-card:hover{
+        transform:translateY(-6px);
+    }
+
+    .benefit-card h3{
+        margin-top:15px;
+        margin-bottom:10px;
+        color:#00611B;
+        font-size:1.15rem;
+        font-weight:700;
+    }
+
+    .benefit-card p{
+        font-size:.90rem;
+        line-height:1.5;
+    }
+
+*/
+
+
+    /* ===================== FORM ===================== */
+    .registration-layout{display:grid;grid-template-columns:.9fr 1.1fr;gap:24px;align-items:stretch}
+    .form-image-panel{border-radius:var(--radio-xl);overflow:hidden;position:relative;min-height:640px;border:1px solid rgba(0,97,27,.12);box-shadow:var(--sombra)}
+    .form-image-panel img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:opacity .28s ease, transform .28s ease}
+    .form-image-panel::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,97,27,.02),rgba(0,97,27,.72))}
+    .form-image-caption{position:absolute;z-index:1;left:24px;right:24px;bottom:24px;background:rgba(255,255,255,.92);border-radius:24px;padding:20px;backdrop-filter:blur(14px)}
+    .form-image-caption strong{display:block;color:var(--verde-oscuro);font-size:1.2rem;margin-bottom:5px}
+
+    form{display:grid;gap:16px}
+    .form-card{padding:28px}
+    .field{display:grid;gap:7px}
+    label{font-weight:900;color:var(--verde-oscuro);font-size:.93rem}
+    input,select,textarea{
+      width:100%;border:1px solid rgba(0,97,27,.18);background:var(--blanco);border-radius:16px;padding:14px 15px;outline:none;transition:all .2s ease;color:var(--negro)
+    }
+    textarea{min-height:88px;resize:vertical}
+    input:focus,select:focus,textarea:focus{border-color:var(--verde-claro);box-shadow:0 0 0 4px rgba(75,169,78,.15)}
+    .form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+    .helper{font-size:.82rem;color:var(--gris-700);line-height:1.45}
+    .commit-box{border:1px solid rgba(0,97,27,.14);border-radius:20px;padding:16px;background:linear-gradient(135deg,rgba(242,242,242,.9),rgba(255,255,255,.94))}
+    .commit-toggle{display:flex;align-items:flex-start;gap:12px;cursor:pointer}
+    .commit-toggle input{width:22px;height:22px;margin-top:3px;accent-color:var(--verde-oscuro)}
+    .status{display:none;padding:16px;border-radius:18px;font-weight:850;line-height:1.45}
+    .status.show{display:block}
+    .status.success{background:rgba(75,169,78,.15);color:var(--verde-oscuro);border:1px solid rgba(75,169,78,.28)}
+    .status.error{background:rgba(246,166,35,.16);color:var(--negro);border:1px solid rgba(246,166,35,.35)}
+
+    /* ===================== LOCATION / FAQ / CONTACT ===================== */
+    .map-wrap{border-radius:var(--radio-xl);overflow:hidden;box-shadow:var(--sombra);background:var(--blanco);border:1px solid rgba(0,97,27,.12);min-height:520px}
+    .map-wrap iframe{display:block;width:100%;height:520px;border:0}
+    .faq-list{display:grid;gap:14px}
+    details{background:var(--blanco);border:1px solid rgba(0,97,27,.12);border-radius:20px;padding:18px 20px;box-shadow:0 10px 26px rgba(0,0,0,.05)}
+    summary{cursor:pointer;font-weight:950;color:var(--verde-oscuro);display:flex;align-items:center;justify-content:space-between;gap:15px}
+    summary::-webkit-details-marker{display:none}
+    details p{margin-top:12px;color:var(--gris-700);line-height:1.6}
+    .contact-card{display:flex;align-items:center;gap:16px;min-height:140px}
+    .contact-card .icon-round{flex:0 0 auto}
+    .contact-card strong{display:block;color:var(--verde-oscuro);font-size:1.1rem;margin-bottom:5px}
+
+    footer{padding:22px 24px;text-align:center;color:var(--gris-700);font-weight:700;border-top:1px solid rgba(0,97,27,.1);background:rgba(255,255,255,.75)}
+
+    /* ===================== FLOATING WHATSAPP ===================== */
+    .wa-float{
+      position:fixed;right:22px;bottom:22px;width:62px;height:62px;border-radius:50%;background:var(--whatsapp);
+      display:grid;place-items:center;z-index:1250;box-shadow:0 16px 36px rgba(0,0,0,.24);transition:all .25s ease;border:3px solid rgba(255,255,255,.86)
+    }
+    .wa-float svg{width:34px;height:34px;fill:var(--blanco)}
+    .wa-float:hover{transform:scale(1.08);box-shadow:0 24px 55px rgba(37,211,102,.42)}
+
+    /* ===================== CHATBOT ===================== */
+    .bot-float{
+      position:fixed;right:22px;bottom:96px;width:62px;height:62px;border-radius:50%;border:0;cursor:pointer;
+      background:linear-gradient(135deg,var(--verde-oscuro),var(--verde-medio));color:var(--blanco);display:grid;place-items:center;z-index:1250;
+      box-shadow:0 16px 36px rgba(0,97,27,.32);transition:all .25s ease;border:3px solid rgba(255,255,255,.86)
+    }
+    .bot-float:hover{transform:scale(1.08);box-shadow:var(--sombra-hover)}
+    .bot-float svg{width:34px;height:34px;fill:var(--dorado)}
+    .chat-window{
+      position:fixed;right:22px;bottom:170px;width:min(410px,calc(100vw - 44px));height:590px;max-height:calc(100vh - 190px);
+      background:var(--blanco);border-radius:28px;box-shadow:0 28px 80px rgba(0,0,0,.28);border:1px solid rgba(0,97,27,.15);
+      z-index:1260;display:none;flex-direction:column;overflow:hidden;animation:chatIn .25s ease both;
+    }
+    .chat-window.open{display:flex}
+    @keyframes chatIn{from{opacity:0;transform:translateY(18px) scale(.96)}to{opacity:1;transform:translateY(0) scale(1)}}
+    .chat-header{padding:16px 18px;background:linear-gradient(135deg,var(--verde-oscuro),var(--verde-medio));color:var(--blanco);display:flex;align-items:center;justify-content:space-between;gap:12px}
+    .chat-id{display:flex;align-items:center;gap:12px;font-weight:950}
+    .chat-avatar{width:42px;height:42px;border-radius:16px;background:rgba(255,255,255,.14);display:grid;place-items:center;border:1px solid rgba(255,255,255,.18)}
+    .chat-avatar svg{width:28px;height:28px;fill:var(--dorado)}
+    .chat-actions{display:flex;gap:8px}
+    .chat-icon-btn{width:35px;height:35px;border-radius:50%;border:1px solid rgba(255,255,255,.2);background:rgba(255,255,255,.12);color:var(--blanco);cursor:pointer;display:grid;place-items:center;transition:.2s}
+    .chat-icon-btn:hover{background:rgba(255,255,255,.22);transform:translateY(-1px)}
+    .chat-icon-btn svg{width:18px;height:18px;fill:currentColor}
+    .chat-body{flex:1;padding:16px;overflow-y:auto;background:linear-gradient(180deg,rgba(242,242,242,.72),rgba(255,255,255,.96))}
+    .msg{display:flex;gap:10px;margin-bottom:13px;animation:fadeSlide .2s ease both}
+    .msg.user{justify-content:flex-end}
+    .msg-bubble{max-width:82%;border-radius:18px;padding:12px 14px;line-height:1.45;font-size:.92rem;box-shadow:0 8px 18px rgba(0,0,0,.06)}
+    .msg.bot .msg-bubble{background:var(--blanco);border:1px solid rgba(0,97,27,.12);color:var(--negro)}
+    .msg.user .msg-bubble{background:linear-gradient(135deg,var(--verde-oscuro),var(--verde-medio));color:var(--blanco)}
+    .typing{display:none;color:var(--verde-oscuro);font-weight:900;font-size:.86rem;margin:4px 0 12px 6px}
+    .typing.show{display:block}
+    .chips{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0 14px}
+    .chip{border:1px solid rgba(0,97,27,.15);background:var(--blanco);border-radius:999px;padding:8px 10px;cursor:pointer;color:var(--verde-oscuro);font-weight:850;font-size:.78rem;display:inline-flex;align-items:center;gap:7px;transition:.2s}
+    .chip svg{width:15px;height:15px;fill:var(--naranja)}
+    .chip:hover{transform:translateY(-2px);box-shadow:0 10px 20px rgba(0,97,27,.14);border-color:var(--dorado)}
+    .chat-footer{padding:13px;border-top:1px solid rgba(0,97,27,.1);background:var(--blanco);display:flex;gap:8px}
+    .chat-footer input{border-radius:999px;padding:12px 14px}
+    .send-btn{width:48px;height:48px;border-radius:50%;border:0;background:var(--naranja);color:var(--blanco);cursor:pointer;display:grid;place-items:center;transition:.2s;flex:0 0 auto}
+    .send-btn:hover{transform:translateY(-2px);box-shadow:0 12px 24px rgba(243,139,0,.3)}
+    .send-btn svg{width:20px;height:20px;fill:currentColor}
+
+    /* ===================== RESPONSIVE ===================== */
+    @media (max-width:1040px){
+      .hero-grid,.registration-layout{grid-template-columns:1fr}
+      .hero-media{min-height:430px}
+      .form-image-panel{min-height:380px}
+      .grid-4{grid-template-columns:repeat(2,1fr)}
+    }
+    @media (max-width:860px){
+      :root{--nav-height:74px}
+      .topbar{padding:0 16px}
+      .nav-toggle{display:grid;place-items:center}
+      .nav-menu{
+        position:fixed;top:74px;left:14px;right:14px;display:none;grid-template-columns:1fr 1fr;gap:8px;
+        padding:14px;border-radius:24px;background:rgba(255,255,255,.98);box-shadow:var(--sombra);border:1px solid rgba(0,97,27,.12)
+      }
+      .nav-menu.open{display:grid}
+      .nav-link{width:100%;background:var(--gris-200)}
+      .brand-title span{display:none}
+      .grid-2,.grid-3{grid-template-columns:1fr}
+      .section-head{display:block}
+      .event-meta{grid-template-columns:1fr}
+      .modal-grid{grid-template-columns:1fr}.modal img{min-height:290px;height:290px}
+      .form-row{grid-template-columns:1fr}
+      .timeline-item{grid-template-columns:88px 1fr}
+    }
+    @media (max-width:560px){
+      .view{padding:28px 16px}.hero-card{padding:26px}.grid-4{grid-template-columns:1fr}
+      .hero-media{min-height:360px}.hero-badge{align-items:flex-start}.hero-badge img{width:55px;height:55px}.timeline-detail{display:block}.timeline-detail svg{margin-top:10px}
+      .chat-window{right:12px;bottom:158px;width:calc(100vw - 24px);height:560px}.bot-float,.wa-float{right:14px}
+    }
+
+    @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+  </style>
+</head>
+<body>
+  <header class="topbar" aria-label="Barra superior de navegación">
+    <div class="nav-shell">
+      <a class="brand" href="#inicio" data-target="inicio" aria-label="Ir a Inicio">
+        <img class="brand-logo" src="imagenes/logo_secplan.jpg" alt="Logo SECPLAN" />
+        <div class="brand-title"><strong>Semillas Financieras</strong><span>Portal Inteligente Corporativo</span></div>
+      </a>
+      <button class="nav-toggle" id="navToggle" aria-label="Abrir menú" aria-controls="navMenu" aria-expanded="false">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16v2H4zm0 4h16v2H4zm0 4h16v2H4z"/></svg>
+      </button>
+      <nav>
+        <ul class="nav-menu" id="navMenu">
+          <li><button class="nav-link active" data-target="inicio">Inicio</button></li>
+          <li><button class="nav-link" data-target="sobre">Sobre el evento</button></li>
+          <li><button class="nav-link" data-target="agenda">Agenda</button></li>
+          <li><button class="nav-link" data-target="instructores">Instructores</button></li>
+          <li><button class="nav-link" data-target="beneficios">Beneficios</button></li>
+          <li><button class="nav-link" data-target="inscripcion">Inscripción</button></li>
+          <li><button class="nav-link" data-target="ubicacion">Ubicación</button></li>
+          <li><button class="nav-link" data-target="faq">FAQ</button></li>
+          <li><button class="nav-link" data-target="contacto">Contacto</button></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- ===================== INICIO ===================== -->
+    <section id="inicio" class="view active" aria-labelledby="inicio-title">
+      <div class="container hero-grid">
+        <div class="hero-card">
+          <span class="eyebrow">Programa Piloto</span>
+          <h1 id="inicio-title"><span class="title-accent">“SEMILLAS FINACIERAS”</span><br/>Educación Financiera para hijos de socios</h1>
+          <p class="lead" style="margin-top:22px">Programa Piloto de Educación Financiera para hijos de socios.</p>
+          <div class="event-meta" aria-label="Información principal del evento">
+            <div class="meta-tile"><span>Fecha</span><strong>Octubre y Noviembre de 2026</strong></div>
+            <div class="meta-tile"><span>Horario</span><strong>8:00 AM – 2:00 PM</strong></div>
+            <div class="meta-tile"><span>Lugar</span><strong>Club del BCIE · Tegucigalpa, Honduras</strong></div>
+          </div>
+          <div class="btn-row">
+            <button class="btn btn-primary" data-target="inscripcion">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 3h-1V1h-2v2H8V1H6v2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2Zm0 16H5V9h14v10ZM5 7V5h14v2H5Zm2 4h5v5H7v-5Z"/></svg>
+              Inscribir mi hijo
+            </button>
+            <button class="btn btn-secondary" data-target="agenda">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h16v2H4V4Zm0 5h16v2H4V9Zm0 5h10v2H4v-2Zm0 5h16v2H4v-2Z"/></svg>
+              Ver Agenda
+            </button>
+          </div>
+        </div>
+        <div class="hero-media" aria-label="Imagen principal del evento">
+          <img src="imagenes/finanzas-personales-fondo.png" alt="Imagen principal sobre finanzas personales" />
+          <div class="hero-badge">
+            <img src="imagenes/logo_secplan.jpg" alt="Logo SECPLAN" />
+            <div><strong>Cooperativa SECPLAN</strong><span>Formación financiera para hijos de socios</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== SOBRE ===================== -->
+    <section id="sobre" class="view" aria-labelledby="sobre-title">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <span class="eyebrow">Sobre el evento</span>
+            <h2 id="sobre-title">Dos experiencias transformadoras</h2>
+          </div>
+          <p class="lead"><strong>Una ruta para niños y otra para jóvenes, con contenido adaptado a cada edad.</p>
+        </div>
+        <div class="grid-2 programs">
+          <article class="card program-card orange">
+            <span class="program-label">Para Niños</span>
+            <h3 class="program-title">Mis Primeros pasos financieros</h3>
+            <p class="muted"><strong>Niños 8 a 12 años</strong></p>
+            <ul class="program-list">
+              <li><svg viewBox="0 0 24 24"><path d="M5 3h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2Z"/></svg>Ahorro y alcancía</li>
+              <li><svg viewBox="0 0 24 24"><path d="M5 3h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2Z"/></svg>Metas financieras</li>
+              <li><svg viewBox="0 0 24 24"><path d="M5 3h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2Z"/></svg>Juegos financieros</li>
+              <li><svg viewBox="0 0 24 24"><path d="M5 3h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2Z"/></svg>Valores cooperativos</li>
+            </ul>
+          </article>
+          <article class="card program-card green">
+            <span class="program-label">Para Jóvenes</span>
+            <h3 class="program-title">Construyendo Mi Futuro Financiero</h3>
+            <p class="muted"><strong>Jóvenes 13 a 17 años</strong></p>
+            <ul class="program-list">
+              <li><svg viewBox="0 0 24 24"><path d="M5 3h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2Z"/></svg>Presupuesto personal</li>
+              <li><svg viewBox="0 0 24 24"><path d="M5 3h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2Z"/></svg>Finanzas digitales</li>
+              <li><svg viewBox="0 0 24 24"><path d="M5 3h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2Z"/></svg>Emprendimiento</li>
+              <li><svg viewBox="0 0 24 24"><path d="M5 3h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2Z"/></svg>Proyecto de vida</li>
+            </ul>
+          </article>
+        </div>
+        <div class="quote-ribbon">Más que un proyecto de capacitación:<em>una inversión en el futuro de las familias y de nuestra Cooperativa.</em></div>
+      </div>
+    </section>
+
+    <!-- ===================== AGENDA ===================== -->
+    <section id="agenda" class="view" aria-labelledby="agenda-title">
+      <div class="container">
+        <div class="section-head">
+          <div><span class="eyebrow">Cronograma</span><h2 id="agenda-title">Agenda del evento</h2></div>
+           <p class="lead agenda-horario"><strong>Horario del programa:</strong> 8:00 AM – 2:00 PM.</p>
+
+
+
+
+
+        </div>
+        <div class="timeline" id="agendaList"></div>
+      </div>
+    </section>
+
+    <!-- ===================== INSTRUCTORESS ===================== -->
+    <section id="instructores" class="view" aria-labelledby="speakers-title">
+      <div class="container">
+        <div class="section-head">
+          <div><span class="eyebrow">Instructores</span><h2 id="speakers-title">Instructores</h2></div>
+        </div>
+        <div class="grid-2" id="speakerGrid"></div>
+      </div>
+    </section>
+
+    <!-- ===================== BENEFICIOS ===================== -->
+    <section id="beneficios" class="view" aria-labelledby="benefits-title">
+      <div class="container">
+        <div class="section-head">
+          <div><span class="eyebrow">Beneficios</span><h2 id="benefits-title">Valor para los participantes</h2></div>
+      </div>
+        <div class="grid-3" id="benefitGrid"></div>
+      </div>
+    </section>
+
+    <!-- ===================== INSCRIPCIÓN ===================== -->
+    <section id="inscripcion" class="view" aria-labelledby="form-title">
+      <div class="container registration-layout">
+        <aside class="form-image-panel" aria-label="Imagen dinámica del programa">
+          <img id="formDynamicImage" src="imagenes/fondo_jovenes.jpg" alt="Imagen del programa seleccionado" />
+          <div class="form-image-caption"><strong id="formImageTitle">Seleccione la edad del hijo a inscribir</strong><p class="muted" id="formImageText">La imagen cambiará automáticamente según el programa asignado.</p></div>
+        </aside>
+        <section class="card form-card">
+          <span class="eyebrow">Formulario</span>
+          <h2 id="form-title">Inscripción</h2>
+          <p class="muted" style="margin:10px 0 20px">Complete todos los campos para habilitar el botón de inscripción.</p>
+          <form id="registrationForm" novalidate>
+            <div class="form-row">
+              <div class="field"><label for="identidadSocio">Número de identidad del socio:</label><input id="identidadSocio" name="Identidad_socio" type="text" required inputmode="numeric" autocomplete="off" /></div>
+              <div class="field"><label for="nombreSocio">Nombre Completo del socio:</label><input id="nombreSocio" name="Nombre_socio" type="text" required autocomplete="name" /></div>
+            </div>
+            <div class="form-row">
+              <div class="field"><label for="numeroSocio">Número de celular:</label><input id="numeroSocio" name="Número_socio" type="tel" required inputmode="numeric" pattern="[0-9]+" autocomplete="tel" /></div>
+              <div class="field"><label for="edadHijo">Edad del hijo a Inscribir:</label><select id="edadHijo" required><option value="">Seleccione</option></select></div>
+            </div>
+            <div class="field"><label for="programa">Programa:</label><input id="programa" name="Program_interes" type="text" value="N/D" readonly required /></div>
+            <div class="field"><label for="nombreHijo">Nombre del hijo:</label><input id="nombreHijo" name="Nombre_hijo_socio" type="text" required /></div>
+            <div class="field"><label for="responsable">Responsable:</label><input id="responsable" name="Responsable_hijo" type="text" required /><span class="helper">Persona autorizada a recoger el menor al finalizar el evento</span></div>
+            <div class="field"><label for="numeroResponsable">Número telefónico de la persona responsable:</label><input id="numeroResponsable" name="Número_responsabe" type="tel" required inputmode="numeric" pattern="[0-9]+" /></div>
+            <div class="commit-box">
+              <label class="commit-toggle" for="compromiso">
+                <input id="compromiso" name="Compromiso" type="checkbox" required />
+                <span><strong>Aceptación del compromiso</strong><br/>Me comprometo a llevar y recoger a mi hijo en la hora y sitio del evento y en caso de no poder asistir deberé cancelar la asistencia de mi hijo una semana antes del evento. Caso contrario autorizo a la Cooperativa SECPLAN a cobrar de mis aportaciones el precio del programa.</span>
+              </label>
+            </div>
+            <div class="status" id="formStatus" role="status" aria-live="polite"></div>
+            <button class="btn btn-primary" id="submitBtn" type="submit" disabled>Inscribir mi hijo(a)</button>
+          </form>
+        </section>
+      </div>
+    </section>
+
+    <!-- ===================== UBICACIÓN ===================== -->
+    <section id="ubicacion" class="view" aria-labelledby="map-title">
+      <div class="container">
+        <div class="section-head"><div><span class="eyebrow">Ubicación</span><h2 id="map-title">Club del BCIE</h2></div><p class="lead">Tegucigalpa, Honduras.</p></div>
+        <div class="map-wrap">
+          <iframe src=" https://www.google.com/maps/place/Club+BCIE/@14.0757799,-87.2063283,16.5z/data=!4m14!1m7!3m6!1s0x8f6fbd48952a3b0f:0xb78324de3e055e5f!2sClub+Social+BCIE!8m2!3d14.0746016!4d-87.205212!16s%2Fg%2F11b5wtl07p!3m5!1s0x8f6fbd4895914f11:0x8abbbae0d7d9bba4!8m2!3d14.0738984!4d-87.2056026!16s%2Fg%2F1tgyxs6l?entry=ttu&g_ep=EgoyMDI2MDYyOS4wIKXMDSoASAFQAw%3D%3D " width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== FAQ ===================== -->
+    <section id="faq" class="view" aria-labelledby="faq-title">
+      <div class="container">
+        <div class="section-head"><div><span class="eyebrow">FAQ</span><h2 id="faq-title">Preguntas frecuentes</h2></div><p class="lead">Respuestas basadas únicamente en la información proporcionada.</p></div>
+        <div class="faq-list" id="faqList"></div>
+      </div>
+    </section>
+
+    <!-- ===================== CONTACTO ===================== -->
+    <section id="contacto" class="view" aria-labelledby="contact-title">
+      <div class="container">
+        <div class="section-head"><div><span class="eyebrow">Contáctanos</span><h2 id="contact-title">Información de contacto</h2></div><p class="lead">Canales oficiales proporcionados para consultas del evento.</p></div>
+        <div class="grid-3">
+          <article class="card contact-card"><div class="icon-round"><svg viewBox="0 0 24 24"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.8-.4 1.2-.3 1.3.4 2.7.6 4.1.6.7 0 1.3.6 1.3 1.3v3.5c0 .7-.6 1.3-1.3 1.3C10.4 21.6 2.4 13.6 2.4 3.3 2.4 2.6 3 2 3.7 2h3.5c.7 0 1.3.6 1.3 1.3 0 1.4.2 2.8.6 4.1.1.4 0 .8-.3 1.2l-2.2 2.2Z"/></svg></div><div><strong>Teléfono</strong><p class="muted">50487372703</p></div></article>
+          <article class="card contact-card"><div class="icon-round"><svg viewBox="0 0 24 24"><path d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2Zm0 4-8 5L4 8V6l8 5 8-5v2Z"/></svg></div><div><strong>Correo</strong><p class="muted">yeossi@gmail.com</p></div></article>
+          <article class="card contact-card"><div class="icon-round"><svg viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 0-7 7c0 5.2 7 13 7 13s7-7.8 7-13a7 7 0 0 0-7-7Zm0 9.5A2.5 2.5 0 1 1 12 6a2.5 2.5 0 0 1 0 5.5Z"/></svg></div><div><strong>Dirección</strong><p class="muted">Secretaría de Finanzas</p></div></article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>Semillas Financieras · Cooperativa SECPLAN · Programa Piloto de Educación Financiera para hijos de socios.</footer>
+
+  <!-- MODAL INSTRUCTORES -->
+  <div class="modal-backdrop" id="speakerModal" role="dialog" aria-modal="true" aria-labelledby="modalName">
+    <div class="modal">
+      <div class="modal-grid">
+        <img id="modalImg" src="" alt="Fotografía ampliada del instructor" />
+        <div class="modal-content">
+          <span class="eyebrow">Detalle del instructor</span>
+          <h2 id="modalName">N/D</h2>
+          <p id="modalDesc">N/D</p>
+          <button class="btn btn-primary" id="closeModal">Cerrar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- WHATSAPP -->
+  <a class="wa-float" aria-label="Abrir WhatsApp" target="_blank" rel="noopener" href="https://wa.me/50487372703?text=Hola.%0ADeseo%20obtener%20m%C3%A1s%20informaci%C3%B3n%20sobre%20el%20evento%20Semillas%20Financieras">
+    <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16.01 3.2A12.73 12.73 0 0 0 5.1 22.48L3.2 29.2l6.9-1.82A12.75 12.75 0 1 0 16.01 3.2Zm0 23.33c-2.02 0-3.99-.58-5.68-1.67l-.4-.25-4.1 1.08 1.1-4-.26-.42a10.57 10.57 0 1 1 9.34 5.26Zm5.8-7.9c-.32-.16-1.88-.93-2.17-1.03-.29-.11-.5-.16-.72.16-.21.32-.82 1.03-1 1.24-.19.21-.37.24-.69.08-.32-.16-1.35-.5-2.57-1.59-.95-.84-1.59-1.89-1.78-2.21-.19-.32-.02-.49.14-.65.14-.14.32-.37.48-.56.16-.19.21-.32.32-.53.11-.21.05-.4-.03-.56-.08-.16-.72-1.74-.98-2.38-.26-.62-.52-.54-.72-.55h-.61c-.21 0-.56.08-.85.4-.29.32-1.11 1.08-1.11 2.64 0 1.56 1.14 3.07 1.3 3.28.16.21 2.24 3.42 5.43 4.79.76.33 1.35.52 1.81.67.76.24 1.45.21 2 .13.61-.09 1.88-.77 2.15-1.51.27-.74.27-1.38.19-1.51-.08-.13-.29-.21-.61-.37Z"/></svg>
+  </a>
+
+  <!-- CHATBOT -->
+  <button class="bot-float" id="botButton" aria-label="Abrir Asistente IA">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a1 1 0 0 1 1 1v1h3a3 3 0 0 1 3 3v7a3 3 0 0 1-3 3H8l-4 4v-4a3 3 0 0 1-3-3V7a3 3 0 0 1 3-3h7V3a1 1 0 0 1 1-1Zm-6 8a2 2 0 1 0 0-4 2 2 0 0 0 0 4Zm12 0a2 2 0 1 0 0-4 2 2 0 0 0 0 4Zm-9 2v2h6v-2H9Z"/></svg>
+  </button>
+  <section class="chat-window" id="chatWindow" aria-label="Asistente IA">
+    <header class="chat-header">
+      <div class="chat-id"><div class="chat-avatar"><svg viewBox="0 0 24 24"><path d="M12 2a1 1 0 0 1 1 1v1h3a3 3 0 0 1 3 3v7a3 3 0 0 1-3 3H8l-4 4v-4a3 3 0 0 1-3-3V7a3 3 0 0 1 3-3h7V3a1 1 0 0 1 1-1Zm-6 8a2 2 0 1 0 0-4 2 2 0 0 0 0 4Zm12 0a2 2 0 1 0 0-4 2 2 0 0 0 0 4Zm-9 2v2h6v-2H9Z"/></svg></div><span>Asistente IA</span></div>
+      <div class="chat-actions">
+        <button class="chat-icon-btn" id="clearChat" aria-label="Limpiar conversación"><svg viewBox="0 0 24 24"><path d="M6 19c0 1.1.9 2 2 2h8a2 2 0 0 0 2-2V7H6v12ZM8 9h8v10H8V9Zm7.5-5-1-1h-5l-1 1H5v2h14V4h-3.5Z"/></svg></button>
+        <button class="chat-icon-btn" id="minChat" aria-label="Minimizar chatbot"><svg viewBox="0 0 24 24"><path d="M5 11h14v2H5z"/></svg></button>
+      </div>
+    </header>
+    <div class="chat-body" id="chatBody"></div>
+    <div class="typing" id="typing">Escribiendo...</div>
+    <footer class="chat-footer">
+      <input id="chatInput" type="text" placeholder="Escribe tu pregunta..." aria-label="Escribe tu pregunta" />
+      <button class="send-btn" id="sendChat" aria-label="Enviar mensaje"><svg viewBox="0 0 24 24"><path d="M2 21 23 12 2 3v7l15 2-15 2v7Z"/></svg></button>
+    </footer>
+  </section>
+
+  <script>
+    /* ============================================================
+       CONFIGURACIÓN GOOGLE APPS SCRIPT
+       Reemplazar por la URL publicada del Apps Script.
+       ============================================================ */
+    const WEB_APP_URL = "PEGAR_AQUI_URL_DEL_APPS_SCRIPT";
+
+    const EVENT_INFO = {
+      nombre: '“SEMILLAS FINACIERAS”',
+      programa: 'Programa Piloto de Educación Financiera para hijos de socios.',
+      fecha: 'Octubre y Noviembre de 2026',
+      horario: '8:00 AM – 2:00 PM',
+      lugar: 'Club del BCIE',
+      ciudad: 'Tegucigalpa, Honduras',
+      telefono: '50487372703',
+      correo: 'yeossi@gmail.com',
+      direccion: 'Secretaría de Finanzas'
+    };
+
+    const agenda = [
+      ['08:00','Registro y entraga de kit'],
+      ['08:30','Lección 1'],
+      ['09:30','Lección 2'],
+      ['10:30','Coffee Break'],
+      ['11:00','Lección 3'],
+      ['12:00','Lección 4'],
+      ['1:00','Almuerzo'],
+      ['02:00','Clausura']
+    ];
+
+    const speakers = [
+      {
+        nombre:'Lic. Carol Cristina Diaz',
+        programa:'Mis Primeros pasos financieros',
+        imagen:'imagenes/especialistaN.jpg',
+        fallback:'imágenes/ especialistaN.jpg',
+        descripcion:'Psicóloga especialista en desarrollo infantil y formación de habilidades para la vida. Cuenta con experiencia en el trabajo con niños y niñas mediante metodologías lúdicas, participativas y orientadas al fortalecimiento de valores, responsabilidad, establecimiento de metas y hábitos positivos.'
+      },
+      {
+        nombre:'Lic. Alex Mendoza',
+        programa:'Construyendo Mi Futuro Financiero',
+        imagen:'imagenes/especialistaJ.jpg',
+        fallback:'imágenes/ especialistaJ.jpg',
+        descripcion:'Psicóloga y Especialista en Desarrollo Juvenil, Liderazgo y Proyecto de Vida. Cuenta con experiencia en la formación de adolescentes y jóvenes mediante metodologías participativas orientadas al fortalecimiento de habilidades para la vida, establecimiento de metas, emprendimiento y toma de decisiones responsables.'
+      }
+    ];
+
+    const svgIcons = {
+      network:'<svg viewBox="0 0 24 24"><path d="M16 11c1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3 1.34 3 3 3ZM8 11c1.66 0 3-1.34 3-3S9.66 5 8 5 5 6.34 5 8s1.34 3 3 3Zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5C15 14.17 10.33 13 8 13Zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5Z"/></svg>',
+      conference:'<svg viewBox="0 0 24 24"><path d="M4 4h16v12H5.17L4 17.17V4Zm2 2v7.5l.34-.34.59-.16H18V6H6Zm3 13h6v2H9v-2Z"/></svg>',
+      case:'<svg viewBox="0 0 24 24"><path d="M10 4h4l1 2h5a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h5l1-2Zm4.2 4h-4.4l-.6 1.2h5.6L14.2 8Z"/></svg>',
+      certificate:'<svg viewBox="0 0 24 24"><path d="M4 3h16v12H4V3Zm2 2v8h12V5H6Zm3 12 3 2 3-2v4l-3-2-3 2v-4Z"/></svg>',
+      digital:'<svg viewBox="0 0 24 24"><path d="M4 5h16a2 2 0 0 1 2 2v9H2V7a2 2 0 0 1 2-2Zm-2 13h20v1H2v-1Zm7-9h6v2H9V9Z"/></svg>',
+      innovation:'<svg viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 0-4 12.74V17h8v-2.26A7 7 0 0 0 12 2Zm-3 17h6v2H9v-2Z"/></svg>',
+      calendar:'<svg viewBox="0 0 24 24"><path d="M7 2h2v2h6V2h2v2h3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h3V2Zm13 8H4v10h16V10Z"/></svg>',
+      pin:'<svg viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 0-7 7c0 5.2 7 13 7 13s7-7.8 7-13a7 7 0 0 0-7-7Zm0 9.5A2.5 2.5 0 1 1 12 6a2.5 2.5 0 0 1 0 5.5Z"/></svg>',
+      mic:'<svg viewBox="0 0 24 24"><path d="M12 14a3 3 0 0 0 3-3V5a3 3 0 0 0-6 0v6a3 3 0 0 0 3 3Zm5-3a5 5 0 0 1-10 0H5a7 7 0 0 0 6 6.92V21h2v-3.08A7 7 0 0 0 19 11h-2Z"/></svg>',
+      register:'<svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6Zm-1 7V3.5L18.5 9H13Zm-5 4h8v2H8v-2Zm0 4h8v2H8v-2Z"/></svg>',
+      car:'<svg viewBox="0 0 24 24"><path d="M18.9 6c-.2-.6-.8-1-1.4-1h-11c-.7 0-1.2.4-1.4 1L3 12v8h2v-2h14v2h2v-8l-2.1-6ZM6.8 7h10.4l1.1 3H5.7l1.1-3ZM7 15a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3Zm10 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3Z"/></svg>',
+      trophy:'<svg viewBox="0 0 24 24"><path d="M18 3V2H6v1H2v5a4 4 0 0 0 4 4h.35A6.02 6.02 0 0 0 11 15.91V19H8v3h8v-3h-3v-3.09A6.02 6.02 0 0 0 17.65 12H18a4 4 0 0 0 4-4V3h-4ZM4 8V5h2v5a2 2 0 0 1-2-2Zm16 0a2 2 0 0 1-2 2V5h2v3Z"/></svg>',
+      money:'<svg viewBox="0 0 24 24"><path d="M3 6h18v12H3V6Zm2 2v8h14V8H5Zm7 7a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z"/></svg>',
+      phone:'<svg viewBox="0 0 24 24"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.8-.4 1.2-.3 1.3.4 2.7.6 4.1.6.7 0 1.3.6 1.3 1.3v3.5c0 .7-.6 1.3-1.3 1.3C10.4 21.6 2.4 13.6 2.4 3.3 2.4 2.6 3 2 3.7 2h3.5c.7 0 1.3.6 1.3 1.3 0 1.4.2 2.8.6 4.1.1.4 0 .8-.3 1.2l-2.2 2.2Z"/></svg>'
+    };
+
+    document.addEventListener('DOMContentLoaded', () => {
+      initNavigation();
+      renderAgenda();
+      renderSpeakers();
+      renderBenefits();
+      renderFAQ();
+      initForm();
+      initChatbot();
+    });
+
+    function initNavigation(){
+      const navMenu = document.getElementById('navMenu');
+      const navToggle = document.getElementById('navToggle');
+      const allTargets = document.querySelectorAll('[data-target]');
+      const links = document.querySelectorAll('.nav-link');
+
+      navToggle.addEventListener('click', () => {
+        const open = navMenu.classList.toggle('open');
+        navToggle.setAttribute('aria-expanded', String(open));
+      });
+
+      allTargets.forEach(el=>{
+        el.addEventListener('click', (e)=>{
+          const target = el.getAttribute('data-target');
+          if(!target) return;
+          e.preventDefault();
+          showView(target);
+          navMenu.classList.remove('open');
+          navToggle.setAttribute('aria-expanded','false');
+        });
+      });
+
+      function showView(id){
+        document.querySelectorAll('.view').forEach(v=>v.classList.toggle('active', v.id === id));
+        links.forEach(l=>l.classList.toggle('active', l.getAttribute('data-target') === id));
+        window.scrollTo({top:0,behavior:'smooth'});
+      }
+      window.showView = showView;
+    }
+
+    function renderAgenda(){
+      const list = document.getElementById('agendaList');
+      list.innerHTML = agenda.map(([hora,actividad]) => `
+        <article class="timeline-item">
+          <div class="time-box">${hora}</div>
+          <div class="timeline-detail"><strong>${actividad}</strong>${svgIcons.calendar}</div>
+        </article>`).join('');
+    }
+
+    function renderSpeakers(){
+      const grid = document.getElementById('speakerGrid');
+      grid.innerHTML = speakers.map((s,i)=>`
+        <article class="card speaker-card">
+          <img class="speaker-img" src="${s.imagen}" onerror="this.onerror=null;this.src='${s.fallback}'" alt="Fotografía de ${s.nombre}" />
+          <div class="speaker-body">
+            <span class="speaker-pill">${s.programa}</span>
+            <h3>${s.nombre}</h3>
+            <p class="muted" style="margin:11px 0 18px"><strong>Programa:</strong> ${s.programa}</p>
+            <button class="btn btn-primary" onclick="openSpeaker(${i})">Ver detalle</button>
+          </div>
+        </article>`).join('');
+    }
+
+    function openSpeaker(index){
+      const speaker = speakers[index];
+      document.getElementById('modalImg').src = speaker.imagen;
+      document.getElementById('modalImg').onerror = function(){ this.onerror=null; this.src=speaker.fallback; };
+      document.getElementById('modalName').textContent = speaker.nombre;
+      document.getElementById('modalDesc').textContent = speaker.descripcion;
+      document.getElementById('speakerModal').classList.add('open');
+    }
+    document.getElementById('closeModal').addEventListener('click',()=>document.getElementById('speakerModal').classList.remove('open'));
+    document.getElementById('speakerModal').addEventListener('click',(e)=>{ if(e.target.id==='speakerModal') e.currentTarget.classList.remove('open'); });
+
+    function renderBenefits(){
+    
+      const benefits = [
+        ['Conocimiento adquirido', svgIcons.digital],
+        ['Cultura de Ahorro', svgIcons.money],
+        ['Metas financieras', svgIcons.calendar],
+        ['Fortalecimiento de valores cooperativos', svgIcons.network],
+        ['Preparación para el futuro financiero', svgIcons.innovation],
+        ['Certificado', svgIcons.certificate]
+    ];
+
+      document.getElementById('benefitGrid').innerHTML = benefits.map(([title,icon])=>`
+        <article class="card benefit-card"><div class="icon-round">${icon}</div><h3>${title}</h3><p class="muted">${getBenefitDescription(title)}</p></article>
+      `).join('');
+    }
+
+    
+function getBenefitDescription(title) {
+
+    const descriptions = {
+
+        'Conocimiento adquirido':
+            'Aprendizaje práctico sobre el manejo responsable del dinero.',
+
+        'Cultura de Ahorro':
+            'Desarrollo de hábitos financieros positivos desde temprana edad.',
+
+        'Metas financieras':
+            'Herramientas para establecer objetivos y planificar su cumplimiento.',
+
+        'Fortalecimiento de valores cooperativos':
+            'Promoción de principios de solidaridad, responsabilidad y cooperación.',
+
+        'Preparación para el futuro financiero':
+            'Bases para tomar decisiones financieras informadas en el futuro.',
+
+        'Certificado':
+            'Reconocimiento por la participación en el programa Semillas Financieras.'
+
+    };
+
+    return descriptions[title] || title;
+
+}
+
+
+    function renderFAQ(){
+      const faqs = [
+        ['¿Cuál es el nombre del evento?', '“SEMILLAS FINACIERAS”.'],
+        ['¿A quién está dirigido?', 'Programa Piloto de Educación Financiera para hijos de socios.'],
+        ['¿Cuándo se realizará?', 'Octubre y Noviembre de 2026.'],
+        ['¿Cuál es el horario?', '8:00 AM – 2:00 PM.'],
+        ['¿Dónde será el evento?', 'Club del BCIE, Tegucigalpa, Honduras.'],
+        ['¿Cuáles son los programas disponibles?', 'Mis Primeros pasos financieros y Construyendo Mi Futuro Financiero.'],
+        ['¿Tiene costo el evento?', 'El evento es completamente gratuito para los hijos de los socios.'],
+        ['¿Puede inscribirse un familiar que no sea hijo directo?', 'El evento es exclusivo para hijos directos de los socios.']
+      ];
+      document.getElementById('faqList').innerHTML = faqs.map(([q,a])=>`<details><summary>${q}</summary><p>${a}</p></details>`).join('');
+    }
+
+    function initForm(){
+      const edad = document.getElementById('edadHijo');
+      const programa = document.getElementById('programa');
+      const form = document.getElementById('registrationForm');
+      const submit = document.getElementById('submitBtn');
+      const status = document.getElementById('formStatus');
+      const dynamicImage = document.getElementById('formDynamicImage');
+      const imageTitle = document.getElementById('formImageTitle');
+      const imageText = document.getElementById('formImageText');
+
+      for(let i=8;i<=17;i++) edad.insertAdjacentHTML('beforeend',`<option value="${i}">${i}</option>`);
+
+      document.querySelectorAll('input[inputmode="numeric"]').forEach(input=>{
+        input.addEventListener('input',()=> input.value = input.value.replace(/\D/g,''));
+      });
+
+      edad.addEventListener('change',()=>{
+        const val = Number(edad.value);
+        if(val>=8 && val<=12){
+          programa.value = 'Mis Primeros pasos financieros';
+          dynamicImage.src = 'imagenes/niños_ahorrando.jpeg';
+          imageTitle.textContent = 'Mis Primeros pasos financieros';
+          imageText.textContent = 'Programa asignado automáticamente para niños de 8 a 12 años.';
+        }else if(val>=13 && val<=17){
+          programa.value = 'Construyendo Mi Futuro Financiero';
+          dynamicImage.src = 'imagenes/Adolecente_ahorrando.jpg';
+          imageTitle.textContent = 'Construyendo Mi Futuro Financiero';
+          imageText.textContent = 'Programa asignado automáticamente para jóvenes de 13 a 17 años.';
+        }else{
+          programa.value = 'N/D';
+          dynamicImage.src = 'imagenes/fondo_jovenes.jpg';
+          imageTitle.textContent = 'Seleccione la edad del hijo a inscribir';
+          imageText.textContent = 'La imagen cambiará automáticamente según el programa asignado.';
+        }
+        validateForm();
+      });
+
+      form.addEventListener('input', validateForm);
+      form.addEventListener('change', validateForm);
+
+      function validateForm(){
+        const valid = form.checkValidity() && programa.value !== 'N/D' && document.getElementById('compromiso').checked;
+        submit.disabled = !valid;
+      }
+
+      form.addEventListener('submit', async (e)=>{
+        e.preventDefault();
+        validateForm();
+        if(submit.disabled) return;
+        setStatus('', '');
+        submit.disabled = true;
+        submit.textContent = 'Enviando inscripción...';
+
+        const payload = {
+          Fecha_Registro: new Date().toISOString(),
+          Identidad_socio: document.getElementById('identidadSocio').value.trim(),
+          Nombre_socio: document.getElementById('nombreSocio').value.trim(),
+          Número_socio: document.getElementById('numeroSocio').value.trim(),
+          Program_interes: document.getElementById('programa').value.trim(),
+          Nombre_hijo_socio: document.getElementById('nombreHijo').value.trim(),
+          Responsable_hijo: document.getElementById('responsable').value.trim(),
+          Número_responsabe: document.getElementById('numeroResponsable').value.trim(),
+          Compromiso: document.getElementById('compromiso').checked ? 'Aceptado' : 'No aceptado'
+        };
+
+        try{
+          if(WEB_APP_URL === 'PEGAR_AQUI_URL_DEL_APPS_SCRIPT'){
+            throw new Error('URL pendiente de configurar');
+          }
+          const res = await fetch(WEB_APP_URL, {
+            method:'POST',
+            mode:'cors',
+            headers:{'Content-Type':'text/plain;charset=utf-8'},
+            body: JSON.stringify(payload)
+          });
+          const data = await res.json();
+          if(!data || data.status !== 'success') throw new Error('Respuesta no exitosa');
+          setStatus('✅ Gracias.<br>Tu inscripción será confirmada mediante correo electrónico.','success');
+          form.reset();
+          programa.value='N/D';
+          edad.dispatchEvent(new Event('change'));
+        }catch(error){
+          setStatus('No fue posible completar el registro en este momento. Por favor, vuelva a intentarlo o contacte a los organizadores por WhatsApp.','error');
+        }finally{
+          submit.textContent = 'Inscribir mi hijo(a)';
+          validateForm();
+        }
+      });
+
+      function setStatus(message,type){
+        status.className = 'status';
+        if(message){status.innerHTML = message; status.classList.add('show',type);}
+      }
+    }
+
+    function initChatbot(){
+      const botButton = document.getElementById('botButton');
+      const chatWindow = document.getElementById('chatWindow');
+      const chatBody = document.getElementById('chatBody');
+      const typing = document.getElementById('typing');
+      const input = document.getElementById('chatInput');
+      const send = document.getElementById('sendChat');
+      const clear = document.getElementById('clearChat');
+      const min = document.getElementById('minChat');
+
+      const quick = [
+        ['¿Cuál es la agenda?', svgIcons.calendar],['¿Dónde será?', svgIcons.pin],['Instructores', svgIcons.mic],['¿Cómo me inscribo?', svgIcons.register],
+        ['¿Habrá parqueo?', svgIcons.car],['¿Entregan certificado?', svgIcons.trophy],['¿Tiene costo?', svgIcons.money],['Contacto', svgIcons.phone]
+      ];
+
+      botButton.addEventListener('click',()=>{ chatWindow.classList.toggle('open'); if(chatWindow.classList.contains('open') && !chatBody.dataset.started) startChat(); });
+      min.addEventListener('click',()=> chatWindow.classList.remove('open'));
+      clear.addEventListener('click',()=>{ chatBody.innerHTML=''; chatBody.dataset.started=''; startChat(); });
+      send.addEventListener('click',()=> handleUser(input.value));
+      input.addEventListener('keydown',(e)=>{ if(e.key==='Enter'){ e.preventDefault(); handleUser(input.value); }});
+
+      function startChat(){
+        chatBody.dataset.started='1';
+        addBot('Hola, soy el Asistente IA del evento Semillas Financieras. Puedo ayudarte con agenda, ubicación, instructores, inscripción, horarios, coste y contacto.');
+        const chipBox = document.createElement('div');
+        chipBox.className='chips';
+        chipBox.innerHTML = quick.map(([q,icon])=>`<button class="chip" type="button">${icon}<span>${q}</span></button>`).join('');
+        chipBox.querySelectorAll('.chip').forEach(btn=> btn.addEventListener('click',()=> handleUser(btn.textContent.trim())));
+        chatBody.appendChild(chipBox);
+        scrollChat();
+      }
+
+      function handleUser(text){
+        const q = (text || '').trim();
+        if(!q) return;
+        input.value='';
+        addUser(q);
+        typing.classList.add('show');
+        scrollChat();
+        window.setTimeout(()=>{
+          typing.classList.remove('show');
+          addBot(answer(q));
+        },480);
+      }
+
+      function addUser(text){ addMsg(text,'user'); }
+      function addBot(text){ addMsg(text,'bot'); }
+      function addMsg(text,type){
+        const row = document.createElement('div');
+        row.className = `msg ${type}`;
+        row.innerHTML = `<div class="msg-bubble">${text}</div>`;
+        chatBody.appendChild(row);
+        scrollChat();
+      }
+      function scrollChat(){ chatBody.scrollTop = chatBody.scrollHeight; }
+
+      function answer(question){
+        const q = normalize(question);
+        if(match(q,['costo','precio','valor','pagar','cuanto cuesta','cuánto cuesta'])) return 'El evento es completamente gratuito para los hijos de los socios.';
+        if(match(q,['familiar','hijastro','sobrino','nieto','prima','primo','hermano'])) return 'El evento es exclusivo para hijos directos de los socios.';
+        if(match(q,['agenda','cronograma','programa del dia','programación'])) return 'La agenda incluye: 08:00 Registro y entraga de kit, 08:30 Lección 1, 09:30 Lección 2, 10:30 Coffee Break, 11:00 Lección 3, 12:00 Lección 4, 1:00 Almuerzo y 02:00 Clausura.';
+        if(match(q,['lugar','donde','ubicacion','ubicación','sede'])) return `El evento se realizará en ${EVENT_INFO.lugar}, ${EVENT_INFO.ciudad}. También puedes revisar la vista Ubicación del portal.`;
+        if(match(q,['conferencista','instructor','facilitador','ponente'])) return 'Los instructores registrados son Lic. Carol Cristina Diaz para Mis Primeros pasos financieros y Lic. Alex Mendoza para Construyendo Mi Futuro Financiero.';
+        if(match(q,['certificado','certificación','constancia'])) return 'El portal incluye Certificado como beneficio del evento. Para confirmar detalles específicos, puedes contactar a los organizadores por WhatsApp o revisar la sección de Contacto.';
+        if(match(q,['parqueo','estacionamiento'])) return 'No se proporcionó información específica sobre parqueo. Te recomendamos contactar a los organizadores por WhatsApp para confirmar este dato.';
+        if(match(q,['registro','inscripcion','inscripción','inscribir','formulario'])) return 'Para inscribir a tu hijo, abre la vista Inscripción, completa todos los campos, selecciona la edad, acepta el compromiso y presiona Inscribir mi hijo(a).';
+        if(match(q,['horario','hora','cuando','cuándo','fecha'])) return `El evento se realizará en ${EVENT_INFO.fecha}, en horario de ${EVENT_INFO.horario}.`;
+        if(match(q,['contacto','telefono','teléfono','correo','email','whatsapp'])) return `Puedes contactar por teléfono ${EVENT_INFO.telefono}, correo ${EVENT_INFO.correo} o mediante el botón flotante de WhatsApp.`;
+        if(match(q,['programa','edad','niños','jovenes','jóvenes'])) return 'Para edades de 8 a 12 años corresponde Mis Primeros pasos financieros. Para edades de 13 a 17 años corresponde Construyendo Mi Futuro Financiero.';
+        return 'No cuento con información específica sobre esa consulta en los datos del portal. Te recomendamos escribir por WhatsApp o revisar la sección de Contacto para recibir orientación directa.';
+      }
+      function normalize(str){return str.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');}
+      function match(text,terms){return terms.some(t=>text.includes(normalize(t)));}
+    }
+  </script>
+</body>
+</html>
